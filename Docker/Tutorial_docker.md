@@ -6,76 +6,76 @@ Esta guía estara basada en como crear una imagen de docker a partir de una imag
 
 ## Obtener imagen de la que partir 
 Descargamos la imagen de Ubuntu 20.04 desde el repositorio de Docker Hub
-'''
+```
 docker pull ubuntu:20.04
-'''
+```
 
 ## Correr por primera vez la imagen 
 
 Con el siguiente comando correremos el contenedor siendo superusuario (root) cosa que es completamente desaconsajable a la hora de desarrollar vuestro proyecto. Pero es necesario al principio para poder establecer el nuevo usuario.
 
 En el siguiente comando se accede a una imagen de nombre <ubuntu:20.04>, se le asigna el nombre <test> al contenedor y se le da acceso a las X, para poder usar la pantalla cuando se lance algún programa dentro del contenedor.
-'''
+```
 docker run -it --net host --privileged  --label ubuntu:20.04 -u root --name test -v  /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY ubuntu:20.04 /bin/bash
-'''
+```
 
 
 ### Crear un usuario para no volver a entrar como root
 
 Instalaciones básicas 
-'''
+```
 apt update
 apt upgrade
 apt install sudo
-'''
+```
 Crear nuevo usuario "docker_robesafe", elegir contraseña para este usuario, muy importante recordarla, ya que será la que se use siempre que se use esta imagen 
-'''
+```
 adduser docker_robesafe
-'''
+```
 Darle acceso a este usuario al sudo, para poder ejecutar acciones como root, para lo que pedirá la contraseña 
-'''
+```
 usermod -aG sudo docker_robesafe
-'''
+```
 
 ## Acceder con tu usuario
 Para acceder con tu usuario, lo primero es guardar la imagen creada, para ello es necesario realizar un commit.
 
 ### Commit imagen 
 En otro terminal 
-'''
+```
 docker commit test ubuntu:20.04 
-'''
+```
 
 ### Salir de la sesión actual
 Ctrl+D 
 ó
-'''
+```
 exit()
-'''
+```
 ### Acceder con el ususario creado
 Exactamente igual que antes pero cambiando el parametro -u que designa el usuario 
-'''
+```
 docker rm test
 docker run -it --net host --privileged  --label ubuntu:20.04 -u docker_robesafe --name test -v  /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY ubuntu:20.04 /bin/bash
-'''
+```
 
 ### Instalar editor de textos
-'''
+```
 sudo apt install gedit
-'''
+```
 
 ### Instalar driver Nvidia (440.100)
 
-'''
+```
 sudo apt install wget
 wget https://us.download.nvidia.com/XFree86/Linux-x86_64/440.100/NVIDIA-Linux-x86_64-440.100.run
 sudo chmod +x NVIDIA-Linux-x86_64-440.100.run 
 sudo ./NVIDIA-Linux-x86_64-440.100.run --no-kernel-module
-'''
+```
 Comprobar que se ha instaldo correctamente 
-'''
+```
 nvidia-smi
-'''
+```
 +-----------------------------------------------------------------------------+
 | NVIDIA-SMI 440.100      Driver Version: 440.100      CUDA Version: 10.2     |
 |-------------------------------+----------------------+----------------------+
@@ -93,6 +93,6 @@ nvidia-smi
 +-----------------------------------------------------------------------------+
 
 ### Commit de la imagen 
-'''
+```
 docker commit test ubuntu:20.04 
-'''
+```
