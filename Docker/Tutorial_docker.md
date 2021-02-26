@@ -173,4 +173,5 @@ En nuestro ejemplo
 docker exec -it test /bin/bash
 ```
 
-## Usar lanzador
+## Usar lanzador (hace todo más cómodo)
+En construcción, jejejejej
