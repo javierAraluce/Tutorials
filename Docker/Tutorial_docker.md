@@ -154,7 +154,7 @@ Si el contenedor no ha sido creado a partir de la imagen, es necesario hacerlo
 ```
 docker run -it --net host --privileged  --label ubuntu:20.04 -u docker_robesafe --name test -v  /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY ubuntu:20.04 /bin/bash
 ```
-Comprobar que esta corriendo 
+Comprobar que el contenedor esta corriendo 
 ```
 docker ps
 ```
@@ -164,3 +164,13 @@ CONTAINER ID   IMAGE          COMMAND       CREATED          STATUS          POR
 2a5d5fad74f4   ubuntu:20.04   "/bin/bash"   3 seconds ago    Up 2 seconds              test
 ```
 
+### Abrir nuevas pestañas de nuestro contenedor despierto 
+```
+docker exec -it <NAME> /bin/bash
+```
+En nuestro ejemplo
+```
+docker exec -it test /bin/bash
+```
+
+## Usar lanzador
