@@ -1,8 +1,8 @@
 # Tutorial docker 
 
-_Una pequeña guía para utilizar docker dentro de Robesafe por Javier Araluce 
+_Una pequeña guía para utilizar docker dentro de Robesafe y crear una imagen por Javier Araluce.
 
-Esta guía estara basada en como crear una imagen de docker a partir de una imagen de Ubuntu 20.04
+Esta guía estara basada en como crear una imagen de docker a partir de una imagen de Ubuntu 20.04 y a utilizarla.
 
 ## Obtener imagen de la que partir 
 Descargamos la imagen de Ubuntu 20.04 desde el repositorio de Docker Hub
@@ -97,4 +97,69 @@ Salida nvidia-smi
 ### Commit de la imagen 
 ```
 docker commit test ubuntu:20.04 
+```
+
+Con esto habremos terminado nuestra imagen inicial del docker 
+
+## Comandos básicos de docker y como ejecutar tu imagen creada
+
+### Comprobar las imagenes en nuestro ordenador 
+```
+docker images
+```
+
+
+### Contenedores despiertos (en ejecución)
+```
+docker ps
+```
+
+```
+CONTAINER ID   IMAGE          COMMAND       CREATED          STATUS          PORTS     NAMES
+2a5d5fad74f4   ubuntu:20.04   "/bin/bash"   3 seconds ago    Up 2 seconds              test
+```
+
+### Contenedores dormidos (no en ejecución)
+
+```
+docker ps -a 
+```
+
+```
+CONTAINER ID   IMAGE          COMMAND       CREATED          STATUS                     PORTS     NAMES
+2a5d5fad74f4   ubuntu:20.04   "/bin/bash"   58 seconds ago   Exited (0) 4 seconds ago             test
+```
+
+### Despertar un contenedor 
+
+```
+docker start <NAME>
+```
+En nuestro ejemplo
+```
+docker start test
+```
+
+### Ejecutar un contenedor despierto 
+```
+docker exec -it <NAME> /bin/bash
+```
+En nuestro ejemplo
+```
+docker exec -it test /bin/bash
+```
+### Crear un contenedor de una imagen 
+Si el contenedor no ha sido creado a partir de la imagen, es necesario hacerlo
+
+```
+docker run -it --net host --privileged  --label ubuntu:20.04 -u docker_robesafe --name test -v  /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY ubuntu:20.04 /bin/bash
+```
+Comprobar que esta corriendo 
+```
+docker ps
+```
+
+```
+CONTAINER ID   IMAGE          COMMAND       CREATED          STATUS          PORTS     NAMES
+2a5d5fad74f4   ubuntu:20.04   "/bin/bash"   3 seconds ago    Up 2 seconds              test
 ```
