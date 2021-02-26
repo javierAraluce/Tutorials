@@ -1,0 +1,8 @@
+FROM ubuntu:20.04
+
+RUN apt update \
+    apt upgrade \
+    apt install sudo \
+    apt install gedit \
+    adduser robesafe_docker \
+    usermod -aG sudo robesafe_docker
