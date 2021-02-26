@@ -4,6 +4,12 @@ _Una pequeña guía para utilizar docker dentro de Robesafe y crear una imagen p
 
 Esta guía estara basada en como crear una imagen de docker a partir de una imagen de Ubuntu 20.04 y a utilizarla.
 
+## Consideraciones a tner en cuenta
+
+Añadir esta línea al bashrc para tener acceso a las X (pantalla)
+```
+xhost +
+```
 ## Obtener imagen de la que partir 
 Descargamos la imagen de Ubuntu 20.04 desde el repositorio de Docker Hub
 ```
