@@ -120,7 +120,7 @@ CONTAINER ID   IMAGE          COMMAND       CREATED          STATUS          POR
 ```
 
 ### Contenedores dormidos (no en ejecución)
-
+Aquí se quedan cuando lo cerramos y no lo matamos
 ```
 docker ps -a 
 ```
@@ -173,5 +173,21 @@ En nuestro ejemplo
 docker exec -it test /bin/bash
 ```
 
+### Guardar nuestro contenedor en la imagen (No es recomendable abusar de esto)
+```
+docker commit <NAME> <IMAGE>
+```
+En nuestro ejemplo
+```
+docker commit test ubuntu:20.04
+```
+### Matar contenedor 
+```
+docker rm <NAME> 
+```
+En nuestro ejemplo
+```
+docker rm test
+```
 ## Usar lanzador (hace todo más cómodo)
 En construcción, jejejejej
