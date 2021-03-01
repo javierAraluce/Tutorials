@@ -25,6 +25,10 @@
 
 # Function to create a new container and run multiple tabs
 
+
+
+
+
 create_new_container()
 {
 	# Kill previous container
@@ -83,22 +87,6 @@ else                   # Root user
 	shared=$HOME/shared_home:/$3/shared_home
 fi
 
-if [[ $1 == "perception_githubs:last" ]]; # Perception GitHubs image
-then
-	aux1=/media/robesafe/Data_RobeSafe/2D_MOT:/home/robesafe/perception_githubs/deepmot/test_tracktor/2D_MOT	
-fi
-
-if [[ $1 == "leaderboard-final:last" ]]; # CARLA challenge image
-then
-        shared=$HOME/shared_home:/workspace/shared_home	
-	aux1=$HOME/team_code:/workspace/shared_home
-fi
-
-if [[ $1 == "uahrobesafe/carla-challenge:sub_1" ]]; # CARLA challenge image
-then
-        shared=$HOME/shared_home:/workspace/shared_home	
-	aux1=$HOME/team_code:/workspace/team_code/catkin_ws/src
-fi
 
 # 2. Check status of the container
 

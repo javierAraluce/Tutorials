@@ -17,6 +17,10 @@ Cuda 11.2
 wget https://developer.download.nvidia.com/compute/cuda/11.2.1/local_installers/cuda_11.2.1_460.32.03_linux.run
 sudo sh cuda_11.2.1_460.32.03_linux.run
 
+Cuda 11.0
+wget http://developer.download.nvidia.com/compute/cuda/11.0.2/local_installers/cuda_11.0.2_450.51.05_linux.run
+sudo sh cuda_11.0.2_450.51.05_linux.run
+
 
 Al bashrc 
 export PATH=/usr/local/cuda/bin:$PATH  
@@ -25,6 +29,8 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 # Instalar Cudnn
 Descargar cuDNN Library for Linux (x86_64)
 https://developer.nvidia.com/rdp/cudnn-download
+
+
 
 
 
@@ -50,8 +56,4 @@ sudo apt install code
 # Instlar git
 sudo apt install git
 
-# Instalar Cudnn
 
-wget https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64/libcudnn7-dev_7.6.5.32-1+cuda10.2_amd64.deb
-
-wget https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64/libcudnn7_7.6.5.32-1+cuda10.2_amd64.deb
