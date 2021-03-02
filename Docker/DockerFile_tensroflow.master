@@ -19,6 +19,6 @@ RUN chmod +x NVIDIA-Linux-x86_64-460.39.run
 
 RUN ./NVIDIA-Linux-x86_64-460.39.run -s -N --no-kernel-module 
 
-# RUN    rm -rf NVIDIA-Linux-x86_64-460.39.run
+RUN    rm -rf NVIDIA-Linux-x86_64-460.39.run
 
-RUN nvidia-smi
+# RUN nvidia-smi
