@@ -43,7 +43,7 @@ https://www.tensorflow.org/install/pip?hl=es-419#system-install
 sudo apt update
 sudo apt install python3-dev python3-pip python3-venv
 
-pip3 install --user --upgrade tensorflow-gpu
+pip3 install --user --upgrade tensorflow-gpu==2.4
 python3 -c 
 
 

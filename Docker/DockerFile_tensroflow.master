@@ -10,15 +10,53 @@ RUN apt update && apt install -y --no-install-recommends \
     apt-utils \
     bash \
     ca-certificates \
-    kmod 
-    # gedit 
+    kmod \
+    git \
+    gedit \
+    gcc-8 \
+    g++-8 \
+    cuda-libraries-11-0=11.0.3-1 \
+    libnpp-11-0=11.1.0.245-1 \
+    cuda-nvtx-11-0=11.0.167-1 \
+    libcublas-11-0=11.2.0.252-1 \
+    libcusparse-11-0=11.1.1.245-1 \
+    libnccl2=$NCCL_VERSION-1+cuda11.0 \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://us.download.nvidia.com/XFree86/Linux-x86_64/460.39/NVIDIA-Linux-x86_64-460.39.run  
 
-RUN chmod +x NVIDIA-Linux-x86_64-460.39.run 
 
-RUN ./NVIDIA-Linux-x86_64-460.39.run -s -N --no-kernel-module 
 
-RUN    rm -rf NVIDIA-Linux-x86_64-460.39.run
+#NVIDIDA Driver 460.39
+RUN /bin/bash -c    'wget https://us.download.nvidia.com/XFree86/Linux-x86_64/460.39/NVIDIA-Linux-x86_64-460.39.run; \  
+                    chmod +x NVIDIA-Linux-x86_64-460.39.run; \
+                    ./NVIDIA-Linux-x86_64-460.39.run -s -N --no-kernel-module;\
+                    rm -rf NVIDIA-Linux-x86_64-460.39.run'
 
-# RUN nvidia-smi
+#Cuda 11.0
+RUN /bin/bash -c    'update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 8; \
+                    update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 8; \
+                    wget http://developer.download.nvidia.com/compute/cuda/11.0.2/local_installers/cuda_11.0.2_450.51.05_linux.run; \
+                    sh cuda_11.0.2_450.51.05_linux.run; \
+                    rm -rf cuda_11.0.2_450.51.05_linux.run; \
+                    echo 'export PATH=/usr/local/cuda-11.0/bin:$PATH ' >> ~/.bashrc; \
+                    echo 'export LD_LIBRARY_PATH=/usr/local/cuda-11.0/lib64:$LD_LIBRARY_PATH  ' >> ~/.bashrc; \ '
+
+# CUDNN
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libcudnn8=$CUDNN_VERSION-1+cuda11.0 \
+    && apt-mark hold libcudnn8 && \
+    rm -rf /var/lib/apt/lists/*
+
+# Tensorflow 2.4
+
+RUN /bin/bash -c    'apt update && apt install -y --no-install-recommends; \
+                    python3-dev python3-pip python3-venv; \
+                    pip3 install --user --upgrade tensorflow-gpu==2.4'
+
+# Install code 
+
+RUN /bin/bash -c    'apt update; apt install software-properties-common apt-transport-https wget; \
+                    wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -; \
+                    add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"; \
+                    apt install code'
+
