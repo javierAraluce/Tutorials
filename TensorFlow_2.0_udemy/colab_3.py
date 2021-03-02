@@ -10,7 +10,8 @@ X_train = X_train / 255.0
 X_train.shape
 X_test =  X_test / 255.0
 
-#Como cada imagen tiene 28x28 píxeles, usamos la función reshape en todo el dataset de entrenamiento para convertirlo 
+#Como cada imagen tiene 28x28 píxeles, 
+# usamos la función reshape en todo el dataset de entrenamiento para convertirlo 
 # en vectores de tamaño [-1 (todos los elementos), anchura * altura]
 X_train = X_train.reshape(-1, 28*28)
 X_test = X_test.reshape(-1, 28*28)
@@ -28,7 +29,8 @@ model.add(tf.keras.layers.Dropout(0.2))
 #model.add(tf.keras.layers.Dense(units=32, activation='relu'))
 #model.add(tf.keras.layers.Dropout(0.2))
 model.add(tf.keras.layers.Dense(units=10, activation='softmax'))
-model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['sparse_categorical_accuracy'])
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', 
+                metrics=['sparse_categorical_accuracy'])
 model.summary()
 
 model.fit(X_train, y_train, epochs = 5, steps_per_epoch = 60000)
@@ -38,5 +40,5 @@ print("Test accuracy: {}".format(test_accuracy))
 model_json = model.to_json()
 with open("fashion_model.json", "w") as json_file:
     json_file.write(model_json)
-    
+
 model.save_weights("fashion_model.h5")
