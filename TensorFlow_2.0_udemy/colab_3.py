@@ -20,6 +20,7 @@ X_test = X_test.reshape(-1, 28*28)
 X_test = X_test.reshape(-1, 28*28)
 X_test.shape
 
+
 model = tf.keras.models.Sequential()
 model.add(tf.keras.layers.Dense(units=128, activation='relu', input_shape=(784, )))
 model.add(tf.keras.layers.Dropout(0.2))
