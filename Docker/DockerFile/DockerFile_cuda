@@ -79,6 +79,25 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 
+
+
+# Tensorflow 2.4
+
+RUN apt update && apt install -y --no-install-recommends \
+    python3-dev python3-pip python3-venv && \
+    pip3 install --user --upgrade tensorflow-gpu==2.4 && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install code 
+
+RUN apt update; apt install software-properties-common apt-transport-https wget && \
+    wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add - && \
+    add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" && \
+    apt install code && \
+    rm -rf /var/lib/apt/lists/*                   
+
+
+
 ARG USER=docker_robesafe
 ARG UID=1000
 ARG GID=1000
@@ -93,17 +112,3 @@ USER docker_robesafe
 WORKDIR /home/docker_robesafe
 RUN /bin/bash -c   'echo 'export PATH=/usr/local/cuda-11.0/bin:$PATH ' >> ~/.bashrc; \
                     echo 'export LD_LIBRARY_PATH=/usr/local/cuda-11.0/lib64:$LD_LIBRARY_PATH  ' >> ~/.bashrc'
-
-
-# Tensorflow 2.4
-
-RUN /bin/bash -c    'apt update && apt install -y --no-install-recommends; \
-                    python3-dev python3-pip python3-venv; \
-                    pip3 install --user --upgrade tensorflow-gpu==2.4'
-
-# Install code 
-
-RUN /bin/bash -c    'apt update; apt install software-properties-common apt-transport-https wget; \
-                    wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -; \
-                    add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"; \
-                    apt install code'                   
