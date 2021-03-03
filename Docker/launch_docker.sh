@@ -41,7 +41,7 @@ create_new_container()
 			command=""
 			if [[ $i -eq 1 ]]; 
 			then 
-				command="docker run -it --net host --name=$2 --privileged -u $3 -v /tmp/.X11-unix:/tmp/.X11-unix -v $shared -e DISPLAY=unix$DISPLAY $1 /bin/bash"
+				command="docker run -it --net host --runtime=nvidia --name=$2 --privileged -u $3 -v /tmp/.X11-unix:/tmp/.X11-unix -v $shared -e DISPLAY=unix$DISPLAY $1 /bin/bash"
 			else
 				command="bash -c 'docker exec -it $2 /bin/bash'"
 			fi
@@ -49,7 +49,7 @@ create_new_container()
 			gnome-terminal --tab "$i" -e "$command"
 		done
 	else 	           # Single tab
-		docker run -it --net host --name=$2 --privileged -u $3 -v $shared -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY $1 /bin/bash
+		docker run -it --net host --runtime=nvidia --name=$2 --privileged -u $3 -v $shared -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY $1 /bin/bash
 	fi
 }
 
