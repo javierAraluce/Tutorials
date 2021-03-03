@@ -1,5 +1,5 @@
 
-# Docker Robesafe Python TF 2.4
+# Docker Robesafe Python TensorFlow 2.4 Cuda 11.0 cudnn8 nvidia 460.39
 # Javier Araluce (RobeSafe research group - University of Alcalá)
 
 FROM ubuntu:20.04
@@ -77,9 +77,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libcudnn8=$CUDNN_VERSION-1+cuda11.0 \
     && apt-mark hold libcudnn8 && \
     rm -rf /var/lib/apt/lists/*
-
-
-
 
 
 # Python
