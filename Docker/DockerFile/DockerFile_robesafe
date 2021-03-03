@@ -1,0 +1,52 @@
+
+# Docker Robesafe Python TF 2.4
+# Javier Araluce (RobeSafe research group - University of Alcalá)
+
+FROM ubuntu:20.04
+
+LABEL maintainer "NVIDIA CORPORATION <cudatools@nvidia.com>"
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt update && apt install -y --no-install-recommends \
+    dialog apt-utils \
+    sudo \
+    wget \
+    bash \
+    git \
+    gcc-8 \
+    g++-8 \
+    gnupg2 curl ca-certificates && \
+    curl -fsSL https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub | apt-key add - && \
+    echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda.list && \
+    echo "deb https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/nvidia-ml.list && \
+    apt-get purge --autoremove -y curl \
+    && rm -rf /var/lib/apt/lists/*
+
+#NVIDIDA Driver 460.39
+RUN /bin/bash -c    'wget https://us.download.nvidia.com/XFree86/Linux-x86_64/460.39/NVIDIA-Linux-x86_64-460.39.run; \  
+                    chmod +x NVIDIA-Linux-x86_64-460.39.run; \
+                    ./NVIDIA-Linux-x86_64-460.39.run -s -N --no-kernel-module;\
+                    rm -rf NVIDIA-Linux-x86_64-460.39.run'
+
+ENV CUDA_VERSION 11.0.3
+
+
+RUN apt update && apt install -y --no-install-recommends \
+    software-properties-common apt-transport-https && \
+    wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add - && \
+    add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" && \
+    apt install -y --no-install-recommends install code && \
+    rm -rf /var/lib/apt/lists/*                   
+
+
+
+ARG USER=docker_robesafe
+ARG UID=1000
+ARG GID=1000
+# default password for user
+ARG PW=robesafe23
+# Option1: Using unencrypted password/ specifying password
+RUN useradd -m ${USER} --uid=${UID} && echo "${USER}:${PW}" | \
+    chpasswd && \
+    usermod -aG sudo docker_robesafe
+
