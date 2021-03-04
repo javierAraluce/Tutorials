@@ -77,7 +77,7 @@ restart_container()
 shared=""
 if [[ $3 != "root" ]]; # Non-root user
 then
-    shared=$HOME/shared_home:/home/$3/shared_home
+    shared=$HOME/Tesis:/home/$3/Tesis
 else                   # Root user
     shared=$HOME/shared_home:/$3/shared_home
 fi
