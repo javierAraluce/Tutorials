@@ -20,24 +20,36 @@ X_test = X_test.reshape(-1, 28*28)
 X_test = X_test.reshape(-1, 28*28)
 X_test.shape
 
-
+dropout = 0.25
 model = tf.keras.models.Sequential()
-model.add(tf.keras.layers.Dense(units=128, activation='relu', input_shape=(784, )))
-model.add(tf.keras.layers.Dropout(0.2))
+model.add(tf.keras.layers.Dense(units=512, activation='relu', input_shape=(784, )))
+model.add(tf.keras.layers.Dropout(dropout))
+model.add(tf.keras.layers.Dense(units=512, activation='relu'))
+model.add(tf.keras.layers.Dropout(dropout))
+model.add(tf.keras.layers.Dense(units=128, activation='relu'))
+model.add(tf.keras.layers.Dropout(dropout))
+model.add(tf.keras.layers.Dense(units=128, activation='relu'))
+model.add(tf.keras.layers.Dropout(dropout))
 
-#model.add(tf.keras.layers.Dense(units=64, activation='relu'))
-#model.add(tf.keras.layers.Dropout(0.2))
-#model.add(tf.keras.layers.Dense(units=32, activation='relu'))
-#model.add(tf.keras.layers.Dropout(0.2))
+
 model.add(tf.keras.layers.Dense(units=10, activation='softmax'))
+
+                   
+
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', 
                 metrics=['sparse_categorical_accuracy'])
 model.summary()
 
-model.fit(X_train, y_train, epochs = 5, steps_per_epoch = 60000)
-test_loss, test_accuracy = model.evaluate(X_test, y_test, steps = 10000)
+
+# Train model
+model.fit(X_train, y_train, epochs = 100, batch_size=256)
+
+
+# Evaluate model 
+test_loss, test_accuracy = model.evaluate(X_test, y_test ) #, steps = 10000)
 print("Test accuracy: {}".format(test_accuracy))
 
+# Save model
 model_json = model.to_json()
 with open("fashion_model.json", "w") as json_file:
     json_file.write(model_json)
