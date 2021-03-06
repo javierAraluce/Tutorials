@@ -102,7 +102,7 @@ model.summary()
 model.compile(loss="sparse_categorical_crossentropy", optimizer="Adam", metrics=["sparse_categorical_accuracy"])
 
 # Entrenar el modelo
-model.fit(X_train, y_train, epochs=5, batch_size=32, steps_per_epoch=50000)
+model.fit(X_train, y_train, epochs=5)
 
 
 # Evaluar el modelo
