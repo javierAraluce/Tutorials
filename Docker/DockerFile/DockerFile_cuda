@@ -110,3 +110,4 @@ WORKDIR /home/docker_robesafe
 
 # Tensorflow 2.4
 RUN pip3 install --user tensorflow-gpu==2.4
+    pip3 install --user matplotlib==3.3.4
