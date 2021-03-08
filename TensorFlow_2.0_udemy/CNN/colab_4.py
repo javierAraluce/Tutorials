@@ -13,12 +13,11 @@ class_names = ['avión', 'coche', 'pájaro', 'gato', 'ciervo',
 
 # Normalización de las imágenes
 X_train.shape
+X_train = X_train / 255.0
 X_test = X_test / 255.0
-y_test[10]
 
 # Construir una red neuronal convolucional
 model = tf.keras.models.Sequential()
-
 
 # Añadir la primera capa de convolución
 # Hyper parámetros de la capa de la RNC:
@@ -102,10 +101,19 @@ model.summary()
 model.compile(loss="sparse_categorical_crossentropy", optimizer="Adam", metrics=["sparse_categorical_accuracy"])
 
 # Entrenar el modelo
-model.fit(X_train, y_train, epochs=5, batch_size=32, steps_per_epoch=50000)
+model.fit(
+    x=X_train, y=y_train, batch_size=32, epochs=50, verbose=1, callbacks=None,
+    validation_split=0.0, validation_data=None, shuffle=True, class_weight=None,
+    sample_weight=None, initial_epoch=0, steps_per_epoch=None,
+    validation_steps=None, validation_batch_size=None, validation_freq=1,
+    max_queue_size=10, workers=1, use_multiprocessing=False
+)
 
 
 # Evaluar el modelo
-test_loss, test_accuracy = model.evaluate(X_test, y_test)
+test_loss, test_accuracy = model.evaluate(
+    x=X_test, y=y_test, batch_size=None, verbose=1, sample_weight=None, steps=None,
+    callbacks=None, max_queue_size=10, workers=1, use_multiprocessing=False,
+    return_dict=False
+)
 print("Test accuracy: {}".format(test_accuracy))
-
