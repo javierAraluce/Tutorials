@@ -37,7 +37,7 @@ RUN /bin/bash -c    'update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc
 # Change cuda-compact-11-0 for cuda-11-0
 RUN apt-get update && apt-get install -y --no-install-recommends \
     cuda-cudart-11-0=11.0.221-1 \
-    cuda-11-0 \
+    cuda-11-0=11.0.3-1\
     && ln -s cuda-11.0 /usr/local/cuda && \
     rm -rf /var/lib/apt/lists/*
 
