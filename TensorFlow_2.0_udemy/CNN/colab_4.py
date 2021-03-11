@@ -31,7 +31,6 @@ model.add(tf.keras.layers.Conv2D(
         filters=32, kernel_size=3, padding="same", activation="relu", 
         input_shape=[32, 32, 3]))
 
-
 # Añadir una segunda capa convolucional y la capa de max-pooling
 # Hyper parámetros de la capa de la RNC:
 
@@ -81,7 +80,17 @@ model.add(tf.keras.layers.Flatten())
 
 # units/neurons: 128
 # activation: relu
+dropout  = 0.25
+model.add(tf.keras.layers.Dense(units=512, activation='relu'))
+model.add(tf.keras.layers.Dropout(dropout))
+model.add(tf.keras.layers.Dense(units=512, activation='relu'))
+model.add(tf.keras.layers.Dropout(dropout))
+
+model.add(tf.keras.layers.Dense(units=256, activation='relu'))
+model.add(tf.keras.layers.Dropout(dropout))
 model.add(tf.keras.layers.Dense(units=128, activation='relu'))
+model.add(tf.keras.layers.Dropout(dropout))
+
 
 # Añadir la capa de salida
 # Hyper parámetros de la capa totalmente conectada:
@@ -102,8 +111,8 @@ model.compile(loss="sparse_categorical_crossentropy", optimizer="Adam", metrics=
 
 # Entrenar el modelo
 model.fit(
-    x=X_train, y=y_train, batch_size=32, epochs=50, verbose=1, callbacks=None,
-    validation_split=0.0, validation_data=None, shuffle=True, class_weight=None,
+    x=X_train, y=y_train, batch_size=32, epochs=25, verbose=1, callbacks=None,
+    validation_split=0.1, validation_data=None, shuffle=True, class_weight=None,
     sample_weight=None, initial_epoch=0, steps_per_epoch=None,
     validation_steps=None, validation_batch_size=None, validation_freq=1,
     max_queue_size=10, workers=1, use_multiprocessing=False
