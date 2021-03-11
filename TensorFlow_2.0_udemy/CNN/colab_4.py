@@ -107,7 +107,7 @@ model.summary()
 # sparse_categorical_accuracy comprueba si el valor verdadero maximal coincide con el índice maximal del valor de la predicción.
 
 # https://stackoverflow.com/questions/44477489/keras-difference-between-categorical-accuracy-and-sparse-categorical-accuracy
-model.compile(loss="sparse_categorical_crossentropy", optimizer="Adam", metrics=["sparse_categorical_accuracy"])
+model.compile(optimizer="Adam", loss="sparse_categorical_crossentropy",  metrics=["sparse_categorical_accuracy"])
 
 # Entrenar el modelo
 model.fit(

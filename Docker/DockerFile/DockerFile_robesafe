@@ -16,10 +16,10 @@ RUN apt update && apt install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 #NVIDIDA Driver 440.100
-RUN /bin/bash -c    'wget https://us.download.nvidia.com/XFree86/Linux-x86_64/440.100/NVIDIA-Linux-x86_64-440.100.run; \  
-                    chmod +x VIDIA-Linux-x86_64-440.100.run; \
-                    ./VIDIA-Linux-x86_64-440.100.run -s -N --no-kernel-module;\
-                    rm -rf VIDIA-Linux-x86_64-440.100.run'
+RUN /bin/bash -c    'wget -q https://us.download.nvidia.com/XFree86/Linux-x86_64/440.100/NVIDIA-Linux-x86_64-440.100.run; \  
+                    chmod +x NVIDIA-Linux-x86_64-440.100.run; \
+                    ./NVIDIA-Linux-x86_64-440.100.run -s -N --no-kernel-module;\
+                    rm -rf NVIDIA-Linux-x86_64-440.100.run'
 
 
 ARG USER=docker_robesafe
