@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Carlos Gómez-Huélamo - September 2020
+# Modified Javier Araluce February 2021
 
 # File to launch a docker image. Arguments:
 
