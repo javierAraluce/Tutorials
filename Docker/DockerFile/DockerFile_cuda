@@ -113,4 +113,5 @@ RUN pip3 install --user tensorflow-gpu==2.4 && \
     pip3 install --user matplotlib==3.3.4 && \
     pip3 install --user pandas==1.2.3 && \
     pip3 install --user nltk==3.5 && \
-    pip3 install --user scikit-learn==0.24.1 
+    pip3 install --user scikit-learn==0.24.1 && \
+    pip3 install imageio-ffmpeg == 0.4.3

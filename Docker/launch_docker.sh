@@ -50,7 +50,7 @@ create_new_container()
 			gnome-terminal --tab "$i" -e "$command"
 		done
 	else 	           # Single tab
-		docker run -it --net host --runtime=nvidia --name=$2 --privileged -u $3 -v $shared -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY $1 /bin/bash
+		docker run -it --net host --runtime=nvidia --name=$2 --privileged -u $3 -v $shared  -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY $1 /bin/bash
 	fi
 }
 
