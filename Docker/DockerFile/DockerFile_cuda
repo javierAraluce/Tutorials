@@ -22,7 +22,7 @@ RUN apt update && apt install -y --no-install-recommends \
     apt-get purge --autoremove -y curl \
     && rm -rf /var/lib/apt/lists/*
 
-#NVIDIDA Driver 460.39
+#NVIDIA Driver 460.39
 RUN /bin/bash -c    'wget https://us.download.nvidia.com/XFree86/Linux-x86_64/460.39/NVIDIA-Linux-x86_64-460.39.run; \  
                     chmod +x NVIDIA-Linux-x86_64-460.39.run; \
                     ./NVIDIA-Linux-x86_64-460.39.run -s -N --no-kernel-module;\
