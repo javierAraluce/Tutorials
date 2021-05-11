@@ -13,8 +13,6 @@ RUN apt update && apt install -y --no-install-recommends \
     git \
     gcc-8 \
     g++-8 \
-    kmod \
-    gnupg2 curl ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
 #NVIDIDA Driver 460.39
@@ -33,4 +31,14 @@ ARG PW=robesafe23
 RUN useradd -m ${USER} --uid=${UID} && echo "${USER}:${PW}" | \
     chpasswd && \
     usermod -aG sudo docker_robesafe
+
+USER docker_robesafe
+WORKDIR /home/docker_robesafe
+
+RUN apt-get update &&
+sudo apt-get install software-properties-common &&
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test &&
+wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add - &&
+sudo apt-add-repository "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-8 main" &&
+sudo apt-get update
 
