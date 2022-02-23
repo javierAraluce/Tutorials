@@ -35,7 +35,7 @@ create_new_container()
 
 	# Create and run multiple tabs
 
-	if [[ $4 -gt 0 ]]; # Multiple tabs
+	if [[ $4 -gt 1 ]]; # Multiple tabs
 	then
 		for (( i=1; i<=$4; i++ ))
 		do 
@@ -44,15 +44,14 @@ create_new_container()
 			then 
 				command="docker run -it \
 				--net host \
-				--gpus all \
+				"${FLAGS[@]}" \
 				--name=$2 \
-				--privileged \
 				-u $3 \
 				-v /dev:/dev \
 				--device /dev/snd \
 				-e PULSE_SERVER=unix:${XDG_RUNTIME_DIR}/pulse/native \
-	          		-v ${XDG_RUNTIME_DIR}/pulse/native:${XDG_RUNTIME_DIR}/pulse/native \
-	          		--group-add $(getent group audio | cut -d: -f3) \
+				-v ${XDG_RUNTIME_DIR}/pulse/native:${XDG_RUNTIME_DIR}/pulse/native \
+				--group-add $(getent group audio | cut -d: -f3) \
 				-v /tmp/.X11-unix:/tmp/.X11-unix \
 				-v $shared \
 				-e DISPLAY=unix$DISPLAY $1 /bin/bash"
@@ -62,27 +61,32 @@ create_new_container()
 
 			gnome-terminal --tab "$i" -e "$command"
 		done
-	else 	           # Single tab
+	else 	
+	# Single tab       
 		docker run -it \
 			--net host \
-			--gpus all \
+			"${FLAGS[@]}" \
 			--name=$2 \
-			--privileged \
 			-u $3 \
 			-v /dev:/dev \
 			--device /dev/snd \
 			-e PULSE_SERVER=unix:${XDG_RUNTIME_DIR}/pulse/native \
-          		-v ${XDG_RUNTIME_DIR}/pulse/native:${XDG_RUNTIME_DIR}/pulse/native \
-          		--group-add $(getent group audio | cut -d: -f3) \
+			-v ${XDG_RUNTIME_DIR}/pulse/native:${XDG_RUNTIME_DIR}/pulse/native \
+			--group-add $(getent group audio | cut -d: -f3) \
 			-v /tmp/.X11-unix:/tmp/.X11-unix \
 			-v $shared \
-			-e DISPLAY=unix$DISPLAY $1 /bin/bash
+			-e DISPLAY=unix$DISPLAY $1 nvidia-smi
 	fi
 }
 
 # --runtime=nvidia
 
 # Function to restart a stopped container and run multiple tabs
+#GPU 0
+#GPU-55a5e8e6-0b0a-a070-66a7-943b8056c017
+
+#GPU 1
+#GGPU-959effdb-d742-1ca6-e3d6-c48c6cdc023a
 
 restart_container()
 {
@@ -120,6 +124,15 @@ echo "Image name: " $1
 echo "Container name: " $2
 echo "User: " $3
 echo "Number of tabs: " $4
+
+if [[ $6 -eq 1 ]]; 
+then
+	FLAGS=(--gpus '"device=1"')
+else
+	FLAGS=(--gpus '"device=0"')
+fi
+
+echo "${FLAGS[@]}"
 
 # 3. Run the image
 
