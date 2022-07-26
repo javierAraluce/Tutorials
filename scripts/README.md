@@ -6,6 +6,8 @@ crontab -l: lista el archivo crontab del usuario, con todas sus tareas configura
 
 crontab -r: elimina el archivo crontab de un usuario. El borrado no es recuperable.
 
+crontab file: carga el archivo en el crontab
+
 ```
 00 20 * * * /home/robesafe/Tesis/Repos/Tutorials/scripts/check_training.sh >> /home/robesafe/cron.log
 ```
