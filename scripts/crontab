@@ -1,0 +1,1 @@
+00 20 * * * sh /home/robesafe/Tesis/Repos/Tutorials/scripts/check_training.sh >> /home/robesafe/cron.log
