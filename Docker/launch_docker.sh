@@ -75,7 +75,7 @@ create_new_container()
 			--group-add $(getent group audio | cut -d: -f3) \
 			-v /tmp/.X11-unix:/tmp/.X11-unix \
 			-v $shared \
-			-e DISPLAY=unix$DISPLAY $1 nvidia-smi
+			-e DISPLAY=unix$DISPLAY $1 /bin/bash
 	fi
 }
 
@@ -110,9 +110,9 @@ restart_container()
 shared=""
 if [[ $3 != "root" ]]; # Non-root user
 then
-    shared=$HOME/Tesis:/home/$3/Tesis
+    shared=$HOME/Tesis:/home/$3/Tesis:Z
 else                   # Root user
-    shared=$HOME/shared_home:/$3/shared_home
+    shared=$HOME/Tesis:/$3/Tesis
 fi
 
 # 2. Check status of the container
@@ -128,6 +128,9 @@ echo "Number of tabs: " $4
 if [[ $6 -eq 1 ]]; 
 then
 	FLAGS=(--gpus '"device=1"')
+elif [[ $6 -eq 3 ]]; 
+then
+	FLAGS=(--gpus all --privileged)
 else
 	FLAGS=(--gpus '"device=0"')
 fi
