@@ -5,7 +5,7 @@ then
     echo "$SERVICE is running"
     echo "Do not poweroff"
 else
+    date 
     echo "$SERVICE stopped"
-    poweroff
-    echo "hola"
+    systemctl reboot
 fi

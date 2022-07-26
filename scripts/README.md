@@ -13,3 +13,5 @@ crontab file: carga el archivo en el crontab
 ```
 
 Importante, añadir una línea al final 
+
+Ejecutar los comandos con sudo, para que acceda como superusuario y pueda apagar el ordenador
