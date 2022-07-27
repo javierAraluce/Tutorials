@@ -10,5 +10,5 @@ then
 else
     date 
     echo "$SERVICE stopped"
-    systemctl reboot
+    systemctl poweroff
 fi
