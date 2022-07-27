@@ -1,4 +1,7 @@
 #!/bin/bash
+# @author Javier Araluce 
+
+
 SERVICE="python3"
 if pgrep -x "$SERVICE" >/dev/null
 then
