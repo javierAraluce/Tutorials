@@ -1,1 +1,6 @@
+00 02 * * * sh /home/robesafe/Tesis/Repos/Tutorials/scripts/check_training.sh >> /home/robesafe/cron.log
+00 04 * * * sh /home/robesafe/Tesis/Repos/Tutorials/scripts/check_training.sh >> /home/robesafe/cron.log
+00 06 * * * sh /home/robesafe/Tesis/Repos/Tutorials/scripts/check_training.sh >> /home/robesafe/cron.log
 00 20 * * * sh /home/robesafe/Tesis/Repos/Tutorials/scripts/check_training.sh >> /home/robesafe/cron.log
+00 22 * * * sh /home/robesafe/Tesis/Repos/Tutorials/scripts/check_training.sh >> /home/robesafe/cron.log
+00 00 * * * sh /home/robesafe/Tesis/Repos/Tutorials/scripts/check_training.sh >> /home/robesafe/cron.log
